@@ -21,8 +21,8 @@ const getDeviceFile = () => {
 
 const getTemperature = () => {
   return deviceFilePath
-    ? readFile(deviceFilePath)
-    : getDeviceFile().then(() => readFile(deviceFilePath))
+    ? readFile(deviceFilePath, 'utf8')
+    : getDeviceFile().then(() => readFile(deviceFilePath, 'utf8'))
 }
 
 module.exports = getTemperature
