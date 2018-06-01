@@ -5,27 +5,35 @@ const path = require('path')
 const readFile = util.promisify(fs.readFile)
 const readdir = util.promisify(fs.readdir)
 
-let deviceFilePath = null
-const devicesPath = '/sys/bus/w1/devices'
-const deviceFile = 'w1_slave'
-const notDevicesIds = 'w1_bus_master1'
+let temperatureFile = null
+const devices = '/sys/bus/w1/devices'
+const fileName = 'w1_slave'
+const bus = 'w1_bus_master1'
 
-const getDeviceFile = () => {
-  return readdir(devicesPath)
-    .then(dirs => dirs.filter(dir => dir !== notDevicesIds)[0])
-    .then(dir => path.join(devicesPath, dir, deviceFile))
-    .then(path => {
-      deviceFilePath = path
-    })
+class NoDeviceError extends Error {}
+
+const getDeviceFile = async () => {
+  const dirs = await readdir(devices)
+  const device = dirs.filter(dir => dir !== bus)
+  if (!device) {
+    throw new NoDeviceError()
+  }
+  return path.join(devices, device, fileName)
 }
-const temperatureFromFile = () => readFile(deviceFilePath, 'utf8')
-  .then(str => str.split('t=')[1].split('\n')[0])
-  .then(temp => parseFloat(temp) / 1000)
-
-const getTemperature = () => {
-  return deviceFilePath
-    ? temperatureFromFile()
-    : getDeviceFile().then(() => temperatureFromFile())
+const temperatureFromFile = async () => {
+  const buffer = await readFile(temperatureFile, 'utf8')
+  const temperature = buffer.split('t=')[1].split('\n')[0]
+  return parseFloat(temperature) / 1000
 }
 
-module.exports = getTemperature
+const getTemperature = async () => {
+  if (!temperatureFile) {
+    temperatureFile = await getDeviceFile()
+  }
+  return temperatureFromFile()
+}
+
+module.exports = {
+  getTemperature,
+  NoDeviceError
+}
