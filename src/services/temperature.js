@@ -18,11 +18,13 @@ const getDeviceFile = () => {
       deviceFilePath = path
     })
 }
+const temperatureFromFile = () => readFile(deviceFilePath, 'utf8')
+  .then(str => str.split('t=')[1].split('\n')[0])
 
 const getTemperature = () => {
   return deviceFilePath
-    ? readFile(deviceFilePath, 'utf8')
-    : getDeviceFile().then(() => readFile(deviceFilePath, 'utf8'))
+    ? temperatureFromFile()
+    : getDeviceFile().then(() => temperatureFromFile())
 }
 
 module.exports = getTemperature
