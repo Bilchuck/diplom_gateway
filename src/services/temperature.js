@@ -20,6 +20,7 @@ const getDeviceFile = () => {
 }
 const temperatureFromFile = () => readFile(deviceFilePath, 'utf8')
   .then(str => str.split('t=')[1].split('\n')[0])
+  .then(temp => parseFloat(temp) / 1000)
 
 const getTemperature = () => {
   return deviceFilePath
