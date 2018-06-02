@@ -12,6 +12,11 @@ const temperatureController = async (req, res) => {
         temperature: null,
         error: 'No temperature device found!'
       })
+    } else {
+      res.send({
+        temperature: null,
+        error
+      })
     }
   }
 }
