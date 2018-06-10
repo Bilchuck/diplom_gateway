@@ -15,7 +15,7 @@ const temperatureController = async (req, res) => {
     } else {
       res.send({
         temperature: null,
-        error
+        error: error.message
       })
     }
   }
