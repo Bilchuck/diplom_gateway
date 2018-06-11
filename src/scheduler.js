@@ -13,7 +13,7 @@ const scheduler = () => {
   schedule.scheduleJob('*/5 * * * * *', async () => {
     const temperature = await getTemperature()
     const time = new Date().toISOString()
-    await addRecord(`${temperature} | ${time}`)
+    await addRecord(`${temperature} | ${time}\n`)
   })
 }
 
