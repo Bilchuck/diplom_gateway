@@ -7,13 +7,13 @@ const util = require('util')
 const appendFile = util.promisify(fs.appendFile)
 const filePath = path.join(__dirname, 'records.txt')
 
-const addRecord = content => appendFile(filePath, 'utf8', content)
+const addRecord = content => appendFile(filePath, content)
 
 const scheduler = () => {
   schedule.scheduleJob('*/5 * * * * *', async () => {
     const temperature = await getTemperature()
     const time = new Date().toISOString()
-    await addRecord(`${temperature} | time`)
+    await addRecord(`${temperature} | ${time}`)
   })
 }
 
