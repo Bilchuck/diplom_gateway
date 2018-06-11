@@ -1,4 +1,4 @@
-CREATE DATABASE temperature IF NOT EXISTS;
+CREATE DATABASE IF NOT EXISTS temperature;
 
 CREATE TABLE `temperature`.`records` IF NOT EXISTS (
   `id` char(36) NOT NULL,
