@@ -1,10 +1,10 @@
 const { getTemperature, NoDeviceError } = require('../services/temperature')
 
 const temperatureController = async (req, res) => {
-  res.send({
-    temperature: 12
-  })
-  return
+  // res.send({
+  //   temperature: 12
+  // })
+  // return
   try {
     const temperature = await getTemperature()
     res.send({
