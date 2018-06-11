@@ -1,7 +1,7 @@
 const sequelize = require('../')
 const Sequelize = require('sequelize')
 
-const Record = sequelize.define('record', {
+const Record = sequelize.define('records', {
   id: {
     primaryKey: true,
     type: Sequelize.UUID,
