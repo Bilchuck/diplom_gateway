@@ -11,9 +11,9 @@ const appendData = content => appendFile(filePath, `${content}\n`, 'utf8')
 const getData = async () => {
   const data = await readFile(filePath, 'utf8')
   const chart = data.split('\n').map(row => {
-    const [temp, time] = row.split(' | ')
+    const [temperature, time] = row.split(' | ')
     return {
-      temp,
+      temperature,
       time
     }
   })
