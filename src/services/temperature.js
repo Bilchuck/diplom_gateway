@@ -14,7 +14,7 @@ class NoDeviceError extends Error {}
 
 const getDeviceFile = async () => {
   const dirs = await readdir(devices)
-  const device = dirs.filter(dir => dir !== bus)
+  const device = dirs.filter(dir => dir !== bus)[0]
   if (!device) {
     throw new NoDeviceError()
   }
