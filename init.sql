@@ -1,3 +1,7 @@
+CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED WITH auth_socket;
+GRANT all ON *.* TO 'client'@'localhost';
+FLUSH PRIVILEGES;
+
 CREATE DATABASE IF NOT EXISTS temperature;
 
 CREATE TABLE IF NOT EXISTS `temperature`.`records` (
