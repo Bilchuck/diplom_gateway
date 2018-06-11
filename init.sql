@@ -1,6 +1,6 @@
-CREATE DATABASE temperature;
+CREATE DATABASE temperature IF NOT EXISTS;
 
-CREATE TABLE `records` IF NOT EXISTS (
+CREATE TABLE `temperature`.`records` IF NOT EXISTS (
   `id` char(36) NOT NULL,
   `temperature` int(11) NOT NULL,
   `time` datetime NOT NULL,
