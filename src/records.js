@@ -11,7 +11,7 @@ const filePath = path.join(__dirname, 'records.txt')
 const appendData = async content => {
   const data = await readFile(filePath, 'utf8')
   const array = data.split('\n')
-  const start = array.slice(-4)
+  const start = array.slice(-49)
 
   const newFile = [...start, content].join('\n')
   await saveDb(newFile)

@@ -4,7 +4,7 @@ const { appendData, createIfNotExistsDb } = require('./records')
 
 const scheduler = () => {
   createIfNotExistsDb().then(() => {
-    schedule.scheduleJob('*/5 * * * * *', async () => {
+    schedule.scheduleJob('*/1 * * * * *', async () => {
       const temperature = await getTemperature()
       const time = new Date().toISOString()
       await appendData(`${temperature} | ${time}`)
