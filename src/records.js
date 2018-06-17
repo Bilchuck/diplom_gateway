@@ -10,7 +10,7 @@ const filePath = path.join(__dirname, 'records.txt')
 
 const appendData = async content => {
   const data = await readFile(filePath, 'utf8')
-  const array = data.split('\n')
+  const array = data.split('\n').filter(r => r.length > 0)
   const start = array.slice(-59)
 
   const newFile = [...start, content].join('\n')
@@ -23,7 +23,7 @@ const saveDb = async content => {
 
 const getData = async () => {
   const data = await readFile(filePath, 'utf8')
-  const chart = data.split('\n').map(row => {
+  const chart = data.split('\n').filter(r => r.length > 0).map(row => {
     const [temperature, time] = row.split(' | ')
     return {
       temperature,
