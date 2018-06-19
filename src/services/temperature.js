@@ -27,7 +27,6 @@ const temperatureFromFile = async () => {
 }
 
 const getTemperature = async () => {
-  return 12
   if (!temperatureFile) {
     temperatureFile = await getDeviceFile()
   }
